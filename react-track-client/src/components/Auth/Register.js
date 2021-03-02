@@ -18,6 +18,8 @@ import Slide from "@material-ui/core/Slide";
 import Gavel from "@material-ui/icons/Gavel";
 import VerifiedUserTwoTone from "@material-ui/icons/VerifiedUserTwoTone";
 
+import Error from "../Shared/Error"
+
 
 function Transition(props) {
   return <Slide direction="up" {...props}/>
@@ -67,7 +69,7 @@ const Register = ({ classes, setNewUser }) => {
                   Register
                   </Button>
                 <Button type="submit" fullWidth variant="outlined" color="primary" onClick={() => setNewUser(false)}>Already A User? Login here</Button>
-                {error && <div>Error</div>}
+                {error && <Error error={error}/>}
               </form>
             )
           }}
@@ -91,7 +93,7 @@ const Register = ({ classes, setNewUser }) => {
 };
 
 const REGISTER_MUTATION = gql `
-mutation ($username: String!, $email: String!, $password: String!) {
+mutation ($username: String, $email: String!, $password: String!) {
   createUser(username: $username, email: $email, password: $password) {
     user {
       username
